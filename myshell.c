@@ -22,10 +22,16 @@ char* get_input(){
 //broken
 int count_tokens(char tokens[]){
     int count = 0;
-    while (tokens!= NULL){
-        printf("%s ",tokens);
-        count++;
-        tokens = strtok(NULL,  " ()<>|&;");
+    int i = 0;
+    while (1){
+        if (tokens[i] == NULL){
+            printf("%s ",tokens);
+            count++;
+            if (tokens[i+1] == NULL){
+                return count;
+            }
+        }
+        i++;
     }
     return count;
 }
@@ -40,9 +46,5 @@ int main(int argc, char ** argv){
 
     int count = count_tokens(tokens);
     printf("\ntoken count %d \n", count);
-
-    count = count_tokens(tokens);
-    printf("\ntoken count %d \n", count);
-
 }
 
