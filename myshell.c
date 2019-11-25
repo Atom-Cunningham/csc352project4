@@ -9,21 +9,20 @@
  * 
  */
 
-#define LEN 128
+#define LEN 1024
 int main(int argc, char ** argv){
-    get_input();
-}
-
-int get_input(){
-    char buffer[LEN];
-    fgets(buffer, LEN, stdin);
-    char * tokens = strtok(buffer, " ()<>|&;");
-    while (tokens!= NULL){
+    char * tokens = get_input();
+     while (tokens!= NULL){
         printf("%s",tokens);
         tokens = strtok(NULL,  " ()<>|&;");
     }
-    
-    return 0;
+}
+
+char* get_input(){
+    char buffer[LEN];
+    fgets(buffer, LEN, stdin);
+    char * tokens = strtok(buffer, " ()<>|&;");
+    return tokens;
 }
 
 /**
