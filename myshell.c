@@ -24,10 +24,10 @@ int count_tokens(char tokens[]){
     int count = 0;
     int i = 0;
     for (i; i < LEN; i++){
-        if (tokens[i] == NULL){
+        if (*tokens[i] == NULL){
             return count;
         }
-        while (tokens[i] != NULL){
+        while (*tokens[i] != NULL){
             i++;
         }count++;
     }
