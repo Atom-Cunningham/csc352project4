@@ -8,8 +8,9 @@
  * time
  * 
  */
-
 #define LEN 1024
+char* get_input();
+
 int main(int argc, char ** argv){
     char * tokens = get_input();
      while (tokens!= NULL){
