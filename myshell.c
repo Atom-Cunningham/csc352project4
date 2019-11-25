@@ -15,9 +15,14 @@ int main(int argc, char ** argv){
 }
 
 int get_input(){
-    char * buffer[LEN];
+    char buffer[LEN];
     fgets(buffer, LEN, stdin);
-    printf("%s",strtok(buffer, " ()<>|&;"));
+    char * tokens = strtok(buffer, " ()<>|&;");
+    while (tokens!= NULL){
+        printf("%s",tokens);
+        tokens = strtok(NULL,  " ()<>|&;");
+    }
+    
     return 0;
 }
 
