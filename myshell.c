@@ -18,6 +18,7 @@ char* get_input(){
     char buffer[LEN];
     fgets(buffer, LEN, stdin);
     printf("%s",strtok(buffer, " ()<>|&;"));
+    return buffer;
 }
 
 /**
