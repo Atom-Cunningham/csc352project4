@@ -34,7 +34,7 @@ int count_tokens(char tokens[]){
     return count;
 }
 
-int run(char * args){
+int run(char ** args){
     printf("running\n");
     if (strcmp(args[0], "exit") == 0){
         printf("args: %s\n args[0]: %s\n",args,args[0]);
