@@ -30,6 +30,7 @@ int count_tokens(char tokens[]){
             if (tokens[i+1] == NULL){
                 return count;
             }
+            i++;
         }
         i++;
     }
