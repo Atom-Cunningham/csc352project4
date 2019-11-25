@@ -23,16 +23,13 @@ char* get_input(){
 int count_tokens(char tokens[]){
     int count = 0;
     int i = 0;
-    while (1){
+    for (i; i < LEN; i++){
         if (tokens[i] == NULL){
-            printf("%s ",tokens);
-            count++;
-            if (tokens[i+1] == NULL){
-                return count;
-            }
-            i++;
+            return count;
         }
-        i++;
+        while (tokens[i] != NULL){
+            i++;
+        }count++;
     }
     return count;
 }
