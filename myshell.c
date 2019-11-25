@@ -41,7 +41,7 @@ int main(int argc, char ** argv){
     int count = count_tokens(tokens);
     printf("\ntoken count %d \n", count);
 
-    int count = count_tokens(tokens);
+    count = count_tokens(tokens);
     printf("\ntoken count %d \n", count);
 
 }
