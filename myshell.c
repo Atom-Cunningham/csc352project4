@@ -11,6 +11,7 @@
 #define LEN 1024
 char* get_input();
 
+//gets the input and splits it
 char* get_input(){
     char buffer[LEN];
     fgets(buffer, LEN, stdin);
@@ -18,6 +19,7 @@ char* get_input(){
     return tokens;
 }
 
+//broken
 int count_tokens(char tokens[]){
     int count = 0;
     while (tokens!= NULL){
@@ -28,15 +30,14 @@ int count_tokens(char tokens[]){
     return count;
 }
 
-int main(int argc, char ** argv){
-    char * tokens = get_input();
-    int count = count_tokens(&tokens);
-    printf("token count = %d ", count);
+int run(char * args){
+
 }
 
+int main(int argc, char ** argv){
+    //get input from the user
+    char * tokens = get_input();
 
-
-/**
- * The following exit, cd
- */
+    int count = count_tokens(tokens);
+}
 
