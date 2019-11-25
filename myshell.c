@@ -39,5 +39,6 @@ int main(int argc, char ** argv){
     char * tokens = get_input();
 
     int count = count_tokens(tokens);
+    printf("\ntoken count %d \n", count);
 }
 
