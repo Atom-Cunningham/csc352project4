@@ -14,11 +14,11 @@ int main(int argc, char ** argv){
     get_input();
 }
 
-char* get_input(){
+int get_input(){
     char buffer[LEN];
     fgets(buffer, LEN, stdin);
     printf("%s",strtok(buffer, " ()<>|&;"));
-    return buffer;
+    return 0;
 }
 
 /**
