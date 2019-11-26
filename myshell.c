@@ -108,6 +108,7 @@ float remove_time_arg(char* args[]){
         while(i < CMD_NUM - 1){
             args[i] = args[i+1];
             i++;
+        }
     }
     return time;
 }
@@ -132,7 +133,7 @@ int run(char * in){
     //EXIT
     if (!strcmp(args[0], "exit")){  
         exit(0);
-        }
+    }
 
     //Change directory
     if(!strcmp(args[0], "cd")){
