@@ -35,6 +35,10 @@ int unix_cmd(char* args[]){
     {
         int status;
         wait(&status);
+        if(WIFEXITED(status)){
+            fprintf(stderr, "The shell has encountered an
+                             error with the previous command");
+        }
     }
     return status;
 }
@@ -66,7 +70,7 @@ int read_input(char* args[], char* in){
     }
     int i = 0;
     while( i<CMD_NUM && (args[++i] = strtok(NULL, " ")) != NULL){
-        
+
     }
     args[i] = NULL;
     //returns the number of strings originally in in
@@ -84,20 +88,15 @@ int run(char * in){
     int arg_count;
     int status;
     char * args[CMD_NUM];
-    printf("running\n");
     arg_count = read_input(args, in);
-    printf("args[0]: %s\n", args[0]);
-    printf("strcmp(%s, exit) == %d", args[0], strcmp(args[0], "exit"));
-    
+
     //EXIT
     if (!strcmp(args[0], "exit")){  
-        printf("exiting");
         exit(0);
         }
 
     //Change directory
     if(!strcmp(args[0], "cd")){
-        printf("cding\n");
         if (arg_count < 2 || args[1] == NULL){
             printf("Please provide a directory name\n");
         }else{
@@ -108,32 +107,27 @@ int run(char * in){
     //System Calls
     else{
         status = unix_cmd(args);
-            //pwd is NULL if bad, else pointer
-        if(( !strcmp(args[0], "pwd") && status == NULL)
-            //ls is 1 or 2 on bad return
-        ||  (!strcmp(args[0], "ls")  && status >  0)
-            //if not pwd, non-zero is usually bad
-        ||  ( strcmp(args[0], "pwd") && status >  0))
-        {
-            fprintf(stderr, "invalid unix cmd");
-        }
     }
 
     //TIME
     return status;
 }
 
-
+/**attempts to get user input from stdin
+ * calls an appropriate shell/system command, or prints an error
+ */
 int main(int argc, char ** argv){
     //get input from the user
     char in[LEN];
     int i = 0;
     while (i < 3){
+        i++;
         if(fgets(in, LEN,stdin) == NULL){
             fprintf(stderr, "failed to read input");
+        }else{
+            run(in);
         }
-        run(in);
-        i++;
+        
     }
     return 0;
 }
