@@ -34,7 +34,7 @@ int count_tokens(char tokens[]){
     return count;
 }
 
-int run(char ** args){
+int run(char * args){
     printf("running\n");
     if (strncmp(args, EXIT, sizeof EXIT) == 0){
         printf("args: %s\n", args);
@@ -46,7 +46,7 @@ int main(int argc, char ** argv){
     //get input from the user
     int i = 0;
     while (i < 3){
-        char * tokens = get_input();
+        char *tokens = get_input();
         run(tokens);
     }
 }
