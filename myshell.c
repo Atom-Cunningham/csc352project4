@@ -125,15 +125,12 @@ int run(char * in){
     //check to see if time is the first argument
     //start a timer
     double time = 0;
+    int timeflag = 0;
     if (!strcmp(args[0], "time")){
         remove_index_0(args);
         int i = 0;
-        while (i < CMD_NUM){
-            printf("%s ", args[i]);
-            i++;
-        }
-
         time = clock()/CLOCKS_PER_SEC;
+        time_flag = 1;
     }
 
     //EXIT
@@ -156,6 +153,9 @@ int run(char * in){
     }
 
     //TIME
+    if (time_flag){
+        printf("the program completed in %f seconds",clock()/CLOCKS_PER_SEC - time);
+    }
     return status;
 }
 
