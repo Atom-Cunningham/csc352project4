@@ -25,9 +25,13 @@ int read_input(char* args[], char* in){
         return 0;
     }
     int i = 1;
-    while((args[i] = strtok(in, " ()<>|&;")) != NULL
-            && i < CMD_NUM){
-                
+    while(i < CMD_NUM){
+
+        //assign strtok to args[i] and return if end
+        args[i] = strtok(in, " ()<>|&;");
+        if(args[i] == NULL){
+            return i;
+        }
         printf("%s\n",args[i]); //sanity check
         i++;
     }
