@@ -35,11 +35,8 @@ int unix_cmd(char* args[]){
     {
         int status;
         wait(&status);
-        if(!status){
-            fprintf(stderr, "invalid system call\n");
-        }
     }
-    return 0;
+    return status;
 }
 
 /**
@@ -117,7 +114,17 @@ int run(char * in){
 
     //System Calls
     else{
-        unix_cmd(args);
+        status = unix_cmd(args);
+            //pwd is NULL if bad, else pointer
+        if(( !strcmp(args[0], "pwd") && status == NULL)
+            //ls is 1 or 2 on bad return
+        ||  (!strcmp(args[0], "ls")  && status >  0)
+            //if not pwd, non-zero is usually bad
+        ||  ( strcmp(args[0], "pwd") && status >  0)
+        {
+            fprintf(stderr, "invalid unix cmd");
+        }
+        
     }
 
     //TIME
