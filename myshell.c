@@ -19,7 +19,6 @@ int read_input(char* args[], char* in){
     //assigns args[i] to the address of each string in in
     
     args[0] = strtok(in," ()<>|&;");
-
     //make sure there is at least one arg
     if (args[0] == NULL){
         return 0;
@@ -27,8 +26,10 @@ int read_input(char* args[], char* in){
     int i = 1;
     while(i < CMD_NUM){
 
-        //assign strtok to args[i] and return if end
-        args[i] = strtok(in, " ()<>|&;");
+        //assign strtok(in) to args[i]
+        //replace old in
+        in = strtok(in, " ()<>|&;");
+        args[i] = in;
         if(args[i] == NULL){
             return i;
         }
