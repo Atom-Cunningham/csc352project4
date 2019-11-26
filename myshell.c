@@ -9,11 +9,13 @@
  * 
  */
 #define LEN 1024
+char* get_input();
+
 //gets the input and splits it
-char** get_input(){
+char* get_input(){
     char buffer[LEN];
     fgets(buffer, LEN, stdin);
-    char ** tokens = strtok(buffer, " ()<>|&;");
+    char * tokens = strtok(buffer, " ()<>|&;");
     return tokens;
 }
 
@@ -32,10 +34,10 @@ int count_tokens(char tokens[]){
     return count;
 }
 
-int run(char ** args){
+int run(char * args){
     printf("running\n");
-    if (strcmp(args[0], "exit") == 0){
-        printf("args: %s\n args[0]: %s\n",args,args[0]);
+    if (strcmp(args, "exit") == 0){
+        printf("args: %s\n", args);
         exit(0);
     }
 }
@@ -44,9 +46,8 @@ int main(int argc, char ** argv){
     //get input from the user
     int i = 0;
     while (i < 3){
-        char ** tokens = get_input();
+        char * tokens = get_input();
         run(tokens);
-        i++;
     }
 }
 
