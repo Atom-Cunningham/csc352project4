@@ -75,7 +75,7 @@ int read_input(char* args[], char* in){
         return 0;
     }
     int i = 0;
-    while( i<CMD_NUM && (args[++i] = strtok(NULL, "\n\t ")) != NULL){
+    while( i<CMD_NUM && (args[++i] = strtok(NULL, " ")) != NULL){
         printf("%s\n",args[i]); //sanity check
     }
     args[i] = NULL;
@@ -117,7 +117,7 @@ int run(char * in){
 
     //System Calls
     else{
-
+        unix_cmd(args);
     }
 
     //TIME
