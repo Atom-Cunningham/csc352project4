@@ -30,7 +30,10 @@
  */
 int unix_cmd(char* args[]){
     if(fork()==0){
-        execvp(args[0], args);
+        if (execvp(args[0], args)){
+            fprintf(stderr, 
+            "%s has failed to execute", args[0]);
+        }
     }
     else
     {
