@@ -116,7 +116,7 @@ FILE * update_stream(char * args[]){
             if (!strcmp(args[i], ">>")){
                 //mode = 'a';
             }
-            file = freopen(filename, mode, stdout);
+            //file = freopen(filename, mode, stdout);
             args[i] = NULL;
             args[i+1]=NULL;
         }
