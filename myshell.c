@@ -90,17 +90,15 @@ int read_input(char* args[], char* in){
  * used to get rid of the time argument
  * returns 0
  */
-float remove_time_arg(char* args[]){
+int remove_time_arg(char* args[]){
     int i = 0;
-    float time = 0;
     if (!strcmp(args[0], "time")){
-        float time = clock();
         while(i < CMD_NUM - 1){
             args[i] = args[i+1];
             i++;
         }
     }
-    return time;
+    return i;
 }
 
 /**updates the input stream to the given filename if possible
@@ -145,7 +143,8 @@ int run(char * in){
 
     //check to see if time is the first argument
     //start a timer
-    float time = remove_time_arg(args);
+    int time = remove_time_arg(args);
+    clock_t start = clock();
 
     //EXIT
     if (!strcmp(args[0], "exit")){  
@@ -164,9 +163,15 @@ int run(char * in){
     //System Calls
     else{
         //check for file names
-        FILE * file = update_stream(args);
+        //FILE * file = update_stream(args);
         status = unix_cmd(args);
-        fclose(file);
+        //fclose(file);
+
+        clock_t end = clock();
+        double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
+        if (time){
+            printf("program ran in %d seconds", time_spent);
+        }
     }
 
     //TIME
