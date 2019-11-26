@@ -112,7 +112,7 @@ FILE * update_stream(char * args[]){
     const char *mode = 'w';
     FILE * file;
     while (i < CMD_NUM && args[i+1]){
-        if(!strcmp(args[i] ">") || !strcmp(args[i], ">>")){
+        if((args[i][0] - '>' == 0) || !strcmp(args[i], ">>")){
             printf("file cmd found\n");
             filename = args[i+1];
             if (!strcmp(args[i], ">>")){
@@ -164,7 +164,7 @@ int run(char * in){
     //System Calls
     else{
         //check for file names
-        FILE * file = update_stream;
+        FILE * file = update_stream(args);
         status = unix_cmd(args);
         fclose(file);
     }
