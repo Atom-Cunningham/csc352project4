@@ -17,7 +17,6 @@
 //gets the input and splits it
 int read_input(char* args[], char* in){
     //assigns args[i] to the address of each string in in
-    
     args[0] = strtok(in," ()<>|&;");
     //make sure there is at least one arg
     if (args[0] == NULL){
@@ -25,7 +24,6 @@ int read_input(char* args[], char* in){
     }
     int i = 1;
     while(i < CMD_NUM){
-
         //assign strtok(in) to args[i]
         //replace old in
         args[i] = strtok(NULL, " \n\t()<>|&;");
@@ -46,12 +44,13 @@ int run(char * in){
     printf("running\n");
     arg_count = read_input(args, in);
     printf("args[0]: %s\n", args[0]);
-    printf("strcmp(%s, exit) == %d", args[0], strcmp(args[0], "exit"));
-    if (!strcmp(args[0], "exit")){  
+    printf("strcmp(%s, exit) == %d", args[0], strcmp(args[0], "exit\0"));
+    if (!strcmp(args[0], "exit\0")){  
         exit(0);
     }
     return 0;
 }
+
 
 int main(int argc, char ** argv){
     //get input from the user
