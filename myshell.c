@@ -43,6 +43,7 @@ int read_input(char* args[], char* in){
 
 int run(char * in){
     int arg_count;
+    int status;
     char * args[CMD_NUM];
     printf("running\n");
     arg_count = read_input(args, in);
@@ -54,17 +55,19 @@ int run(char * in){
         printf("exiting");
         exit(0);
         }
-    return 0;
 
     //CD
     if(!strcmp(args[0], "cd")){
         printf("cding\n");
-        if (arg_count < 2){
+        if (arg_count < 2 || args[1] == NULL){
             printf("Please provide a directory name\n");
         }else{
-
+            status = cd(args[1]);
         }
     }
+    
+    //TIME
+
 }
 
 
