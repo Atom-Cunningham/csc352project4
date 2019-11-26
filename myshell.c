@@ -78,6 +78,7 @@ int read_input(char* args[], char* in){
     while( i<CMD_NUM && (args[++i] = strtok(NULL, "\n\t ")) != NULL){
         printf("%s\n",args[i]); //sanity check
     }
+    args[i] = NULL;
     //returns the number of strings originally in in
     return i;
 }
