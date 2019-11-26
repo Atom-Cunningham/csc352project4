@@ -30,8 +30,9 @@ int run(char * in){
     int arg_count;
     char * args[5];
     printf("running\n");
+    printf("args[0]: %s\n", args[0]);
     if (strcmp(args[0], EXIT) == 0){
-        printf("args[0]: %s\n", args[0]);
+        
         exit(0);
     }
 }
