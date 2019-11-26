@@ -17,7 +17,7 @@
 int read_input(char* args[], char* in){
     //assigns args[i] to the address of each string in in
     int i = 0;
-    while(args[i] = strtok(in, " ()<>|&;") != NULL){
+    while((args[i] = strtok(in, " ()<>|&;")) != NULL){
         i++;
         printf("%s\n",args[i]); //sanity check
     }
