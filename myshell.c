@@ -36,7 +36,7 @@ int unix_cmd(char* args[]){
         int status;
         wait(&status);
         if(!status){
-            fprintf(stderr "invalid system call\n");
+            fprintf(stderr, "invalid system call\n");
         }
     }
     return 0;
