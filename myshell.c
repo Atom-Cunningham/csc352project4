@@ -46,7 +46,7 @@ int run(char * in){
     printf("running\n");
     read_input(args, in);
     printf("args[0]: %s\n", args[0]);
-    if (strcmp(args[0], EXIT) == 0){  
+    if (strcmp(args[0], "exit") == 0){  
         exit(0);
     }
     return 0;
@@ -61,6 +61,7 @@ int main(int argc, char ** argv){
             fprintf(stderr, "failed to read input");
         }
         run(in);
+        i++;
     }
     return 0;
 }
