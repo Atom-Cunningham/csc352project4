@@ -32,7 +32,7 @@ int unix_cmd(char* args[]){
     if(fork()==0){
         if (execvp(args[0], args)){
             fprintf(stderr, 
-            "%s has failed to execute", args[0]);
+            "%s has failed to execute\n", args[0]);
         }
     }
     else
@@ -47,21 +47,6 @@ int unix_cmd(char* args[]){
     return 0;
 }
 
-int unix_cmd_to_file(char* args[], FILE * fp){
-    if(fork()==0){
-        execvp(args[0], args);
-    }
-    else
-    {
-        int status;
-        wait(&status);
-        if(!WIFEXITED(status)){
-            fprintf(stderr, 
-            "The shell has encountered an error with the previous command");
-        }
-    }
-    return 0;
-}
 
 /**
  * attempts to change the current working directory
@@ -97,6 +82,8 @@ int read_input(char* args[], char* in){
     return i;
 }
 
+
+
 /**
  * removes the first item of the passed array
  * by copying values backwards by one
@@ -114,6 +101,33 @@ float remove_time_arg(char* args[]){
         }
     }
     return time;
+}
+
+/**updates the input stream to the given filename if possible
+ * returns 1 if not
+ */
+FILE * update_stream(char * args[]){
+    int i = 0;
+    char * filename = NULL;
+    const char *mode = 'w';
+    FILE * file;
+    while (i < CMD_NUM && args[i+1]){
+        if(!strcmp(args[i] ">") || !strcmp(args[i], ">>")){
+            printf("file cmd found\n");
+            filename = args[i+1];
+            if (!strcmp(args[i], ">>")){
+                mode = 'a';
+            }
+            file = freopen(filename, mode, stdout);
+            args[i] = NULL;
+            args[i+1]=NULL;
+        }
+        i++;
+    }
+    if (!file){
+        fclose(file);
+    }
+    return file;
 }
 
 /**
@@ -149,7 +163,10 @@ int run(char * in){
 
     //System Calls
     else{
+        //check for file names
+        FILE * file = update_stream;
         status = unix_cmd(args);
+        fclose(file);
     }
 
     //TIME
