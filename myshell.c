@@ -8,46 +8,43 @@
  * time
  * 
  */
-#define LEN 1024
+#define LEN 255
 #define EXIT "exit"
+#define CD "cd"
+#define TIME "time"
 
 //gets the input and splits it
-char* get_input(){
-    char buffer[LEN];
-    fgets(buffer, LEN, stdin);
-    char * tokens = strtok(buffer, " ()<>|&;");
-    return tokens;
-}
-
-//broken
-int count_tokens(char tokens[]){
-    int count = 0;
+int read_input(char* args[], char* in){
+    //assigns args[i] to the address of each string in in
     int i = 0;
-    for (i; i < LEN; i++){
-        if (tokens[i] == '\0'){
-            return count;
-        }
-        while (tokens[i] != '\0'){
-            i++;
-        }count++;
+    while(args[i] = strtok(in, " ()<>|&;") != NULL){
+        i++;
+        printf("%s\n",args[i]); //sanity check
     }
-    return count;
+    //returns the number of strings originally in in
+    return i;
 }
 
-int run(char * args){
+
+int run(char * in){
+    int arg_count;
+    char * args[5];
     printf("running\n");
     if (strncmp(args, EXIT, sizeof EXIT) == 0){
-        printf("args: %s\n", args);
+        printf("args[0]: %s\n", args[0]);
         exit(0);
     }
 }
 
 int main(int argc, char ** argv){
     //get input from the user
+    char in[LEN];
     int i = 0;
     while (i < 3){
-        char *tokens = get_input();
-        run(tokens);
+        if(fgets(in, LEN,stdin) == NULL){
+            fprintf(stderr, "failed to read input");
+        }
+        run(in);
     }
 }
 
