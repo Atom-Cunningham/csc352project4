@@ -40,7 +40,7 @@ int unix_cmd(char* args[]){
             "The shell has encountered an error with the previous command");
         }
     }
-    return status;
+    return 0;
 }
 
 /**
