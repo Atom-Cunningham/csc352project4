@@ -12,26 +12,20 @@
 #define EXIT "exit"
 #define CD "cd"
 #define TIME "time"
-#define CMD_NUM 5
+#define CMD_NUM 25
 
 //gets the input and splits it
 int read_input(char* args[], char* in){
     //assigns args[i] to the address of each string in in
     args[0] = strtok(in," ()<>|&;");
     //make sure there is at least one arg
-    if (args[0] == NULL){
+    if ((args[0] = strtok(NULL, " \n\t()<>|&;")) == NULL){
         return 0;
     }
     int i = 1;
-    while(i < CMD_NUM){
-        //assign strtok(in) to args[i]
-        //replace old in
-        args[i] = strtok(NULL, " \n\t()<>|&;");
-        if(args[i] == NULL){
-            return i;
-        }
+    while((args[++i] = strtok(NULL, "\n\t ")) != NULL) &&
+        i < CMD_NUM){
         printf("%s\n",args[i]); //sanity check
-        i++;
     }
     //returns the number of strings originally in in
     return i;
@@ -41,16 +35,13 @@ int read_input(char* args[], char* in){
 int run(char * in){
     int arg_count;
     char * args[CMD_NUM];
-    char * str;
     printf("running\n");
     arg_count = read_input(args, in);
-    str[5] = args[0];
     printf("args[0]: %s\n", args[0]);
-    printf("strcmp(%s, exit) == %d", str, strcmp(str, "exit"));
-    if (!strcmp(str, "exit\0")){  
+    printf("strcmp(%s, exit) == %d", args[0], strcmp(args[0], "exit"));
+    if (!strcmp(args[0], "exit")){  
         exit(0);
     }
-    str[4] = args[0];
     return 0;
 }
 
