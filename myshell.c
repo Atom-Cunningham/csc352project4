@@ -23,8 +23,7 @@ int read_input(char* args[], char* in){
         return 0;
     }
     int i = 1;
-    while((args[++i] = strtok(NULL, "\n\t ")) != NULL) &&
-        i < CMD_NUM){
+    while((args[++i] = strtok(NULL, "\n\t ")) != NULL && i<CMD_NUM){
         printf("%s\n",args[i]); //sanity check
     }
     //returns the number of strings originally in in
