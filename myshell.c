@@ -9,10 +9,22 @@
  * 
  */
 #define LEN 255
-#define EXIT "exit"
-#define CD "cd"
-#define TIME "time"
 #define CMD_NUM 25
+
+int cd(char* new_dir){
+    int status = chdir(new_dir);
+
+    //TODO remove prints
+    char cwd[256];
+    char * newCurrent = getcwd(cwd, sizeof(cwd));
+    printf("%s\n",newCurrent);
+
+    if (status != 0){
+        printf("cannot find directory %s", new_dir);
+    }
+    return status;
+
+}
 
 //gets the input and splits it
 int read_input(char* args[], char* in){
@@ -36,10 +48,23 @@ int run(char * in){
     arg_count = read_input(args, in);
     printf("args[0]: %s\n", args[0]);
     printf("strcmp(%s, exit) == %d", args[0], strcmp(args[0], "exit"));
+    
+    //EXIT
     if (!strcmp(args[0], "exit")){  
+        printf("exiting");
         exit(0);
-    }
+        }
     return 0;
+
+    //CD
+    if(!strcmp(args[0], "cd")){
+        printf("cding\n");
+        if (arg_count < 2){
+            printf("Please provide a directory name\n");
+        }else{
+
+        }
+    }
 }
 
 
