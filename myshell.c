@@ -22,7 +22,7 @@ int read_input(char* args[], char* in){
     if ((args[0] = strtok(NULL, " \n\t()<>|&;")) == NULL){
         return 0;
     }
-    int i = 1;
+    int i = 0;
     while((args[++i] = strtok(NULL, "\n\t ")) != NULL && i<CMD_NUM){
         printf("%s\n",args[i]); //sanity check
     }
