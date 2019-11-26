@@ -16,10 +16,8 @@
 
 //gets the input and splits it
 int read_input(char* args[], char* in){
-    //assigns args[i] to the address of each string in in
-    args[0] = strtok(in," ()<>|&;");
     //make sure there is at least one arg
-    if ((args[0] = strtok(NULL, " \n\t()<>|&;")) == NULL){
+    if ((args[0] = strtok(in, " \n\t()<>|&;")) == NULL){
         return 0;
     }
     int i = 0;
