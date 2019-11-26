@@ -35,7 +35,7 @@ int unix_cmd(char* args[]){
     {
         int status;
         wait(&status);
-        if(WIFEXITED(status)){
+        if(!WIFEXITED(status)){
             fprintf(stderr, 
             "The shell has encountered an error with the previous command");
         }
