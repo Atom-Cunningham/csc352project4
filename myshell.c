@@ -107,14 +107,14 @@ int remove_time_arg(char* args[]){
 FILE * update_stream(char * args[]){
     int i = 0;
     char * filename = NULL;
-    const char *mode = 'w';
+    //const char *mode = 'w';
     FILE * file;
     while (i < CMD_NUM && args[i+1]){
         if((args[i][0] - '>' == 0) || !strcmp(args[i], ">>")){
             printf("file cmd found\n");
             filename = args[i+1];
             if (!strcmp(args[i], ">>")){
-                mode = 'a';
+                //mode = 'a';
             }
             file = freopen(filename, mode, stdout);
             args[i] = NULL;
