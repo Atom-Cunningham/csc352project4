@@ -127,11 +127,10 @@ int run(char * in){
     double time = 0;
     if (!strcmp(args[0], "time")){
         remove_index_0(args);
-
-
         int i = 0;
         while (i < CMD_NUM){
             printf("%s ", args[i]);
+            i++;
         }
 
         time = clock()/CLOCKS_PER_SEC;
@@ -168,7 +167,7 @@ int main(int argc, char ** argv){
     char in[LEN];
     int i = 0;
     while (i < 3){
-        printf("\n>>");
+        printf(">>");
         i++;
         if(fgets(in, LEN,stdin) == NULL){
             fprintf(stderr, "failed to read input");
