@@ -168,7 +168,7 @@ int main(int argc, char ** argv){
     char in[LEN];
     int i = 0;
     while (i < 3){
-        fprint("\n>>");
+        printf("\n>>");
         i++;
         if(fgets(in, LEN,stdin) == NULL){
             fprintf(stderr, "failed to read input");
