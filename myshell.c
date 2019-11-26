@@ -14,11 +14,12 @@
 int cd(char* new_dir){
     int status = chdir(new_dir);
 
+    /**
     //TODO remove prints
     char cwd[256];
     char * newCurrent = getcwd(cwd, sizeof(cwd));
     printf("%s\n",newCurrent);
-
+    */
     if (status != 0){
         printf("cannot find directory %s", new_dir);
     }
@@ -65,7 +66,7 @@ int run(char * in){
             status = cd(args[1]);
         }
     }
-    
+
     //TIME
 
 }
