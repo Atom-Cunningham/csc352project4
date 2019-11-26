@@ -167,18 +167,14 @@ int run(char * in){
         status = unix_cmd(args);
         //fclose(file);
 
-        clock_t end = clock();
-        double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
-        if (time){
-            printf("program ran in %d seconds", time_spent);
-        }
+        
     }
-
     //TIME
+    clock_t end = clock();
+    double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
     if (time){
-        printf("the program completed in %f seconds",clock()/CLOCKS_PER_SEC - time);
+        printf("program ran in %d seconds", elapsed);
     }
-    return status;
 }
 
 /**attempts to get user input from stdin
