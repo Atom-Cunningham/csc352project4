@@ -125,7 +125,7 @@ int run(char * in){
     //check to see if time is the first argument
     //start a timer
     double time = 0;
-    int timeflag = 0;
+    int time_flag = 0;
     if (!strcmp(args[0], "time")){
         remove_index_0(args);
         int i = 0;
