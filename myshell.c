@@ -44,9 +44,9 @@ int run(char * in){
     int arg_count;
     char * args[CMD_NUM];
     printf("running\n");
-    read_input(args, in);
+    arg_count = read_input(args, in);
     printf("args[0]: %s\n", args[0]);
-    if (strcmp(args[0], "exit") == 0){  
+    if (!strcmp(args[0], "exit")){  
         exit(0);
     }
     return 0;
