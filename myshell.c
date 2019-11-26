@@ -16,15 +16,17 @@
 //gets the input and splits it
 int read_input(char* args[], char* in){
     //assigns args[i] to the address of each string in in
-    int i = 0;
+    
     args[0] = strtok(in," ()<>|&;");
 
     //make sure there is at least one arg
     if (args[0] == NULL){
         return 0;
     }
-    while((args[++i] = strtok(in, " ()<>|&;")) != NULL){
+    int i = 1;
+    while((args[i] = strtok(in, " ()<>|&;")) != NULL){
         printf("%s\n",args[i]); //sanity check
+        i++;
     }
     //returns the number of strings originally in in
     return i;
