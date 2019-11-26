@@ -16,9 +16,31 @@
 #include <string.h> 
 #include <stdio.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
 
 #define LEN 255
 #define CMD_NUM 25
+
+/**
+ * attempts to launch a program using the given arguments
+ * calls fork and waits
+ * prints an error message if necessary
+ */
+int unix_cmd(char* args[]){
+    if(fork()==0){
+        execvp(args[0], args);
+    }
+    else
+    {
+        int status;
+        wait(&status);
+        if(!status){
+            fprintf(stderr "invalid system call\n");
+        }
+    }
+    return 0;
+}
 
 /**
  * attempts to change the current working directory
@@ -90,6 +112,11 @@ int run(char * in){
         }else{
             status = cd(args[1]);
         }
+    }
+
+    //System Calls
+    else{
+
     }
 
     //TIME
