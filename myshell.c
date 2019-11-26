@@ -10,6 +10,7 @@
  * into the shell
  * 
  */
+#include <sys/times.h>
 #include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,6 +29,22 @@
  * prints an error message if necessary
  */
 int unix_cmd(char* args[]){
+    if(fork()==0){
+        execvp(args[0], args);
+    }
+    else
+    {
+        int status;
+        wait(&status);
+        if(!WIFEXITED(status)){
+            fprintf(stderr, 
+            "The shell has encountered an error with the previous command");
+        }
+    }
+    return 0;
+}
+
+int unix_cmd_to_file(char* args[], FILE * fp){
     if(fork()==0){
         execvp(args[0], args);
     }
@@ -65,7 +82,7 @@ int cd(char* new_dir){
  */
 int read_input(char* args[], char* in){
     //make sure there is at least one arg
-    if ((args[0] = strtok(in, " \n\t()<>|&;")) == NULL){
+    if ((args[0] = strtok(in, " \n\t()<|&;")) == NULL){
         return 0;
     }
     int i = 0;
@@ -75,6 +92,21 @@ int read_input(char* args[], char* in){
     args[i] = NULL;
     //returns the number of strings originally in in
     return i;
+}
+
+/**
+ * removes the first item of the passed array
+ * by copying values backwards by one
+ * used to get rid of the time argument
+ * returns 0
+ */
+int remove_index_0(char* args[]){
+    int i = 0;
+    while(i < CMD_NUM - 1){
+        args[i] = args[i+1];
+        i++;
+    }
+    return 0;
 }
 
 /**
@@ -89,6 +121,21 @@ int run(char * in){
     int status;
     char * args[CMD_NUM];
     arg_count = read_input(args, in);
+
+    //check to see if time is the first argument
+    //start a timer
+    double time = 0;
+    if (!strcmp(args[0], "time")){
+        remove_index_0(args);
+
+
+        int i = 0;
+        while (i < CMD_NUM){
+            printf("%s ", args[i]);
+        }
+
+        time = clock()/CLOCKS_PER_SEC;
+    }
 
     //EXIT
     if (!strcmp(args[0], "exit")){  
@@ -121,13 +168,13 @@ int main(int argc, char ** argv){
     char in[LEN];
     int i = 0;
     while (i < 3){
+        fprint("\n>>");
         i++;
         if(fgets(in, LEN,stdin) == NULL){
             fprintf(stderr, "failed to read input");
         }else{
             run(in);
         }
-        
     }
     return 0;
 }
