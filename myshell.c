@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> 
+#include <stdio.h>
+#include <unistd.h>
 /**
  * support exit
  * cd
@@ -21,10 +23,9 @@ int cd(char* new_dir){
     printf("%s\n",newCurrent);
     */
     if (status != 0){
-        printf("cannot find directory %s", new_dir);
+        printf("cannot find directory %s\n", new_dir);
     }
     return status;
-
 }
 
 //gets the input and splits it
