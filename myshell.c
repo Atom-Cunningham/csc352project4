@@ -100,13 +100,16 @@ int read_input(char* args[], char* in){
  * used to get rid of the time argument
  * returns 0
  */
-int remove_index_0(char* args[]){
+float remove_time_arg(char* args[]){
     int i = 0;
-    while(i < CMD_NUM - 1){
-        args[i] = args[i+1];
-        i++;
+    float time = 0;
+    if (!strcmp(args[0], "time")){
+        float time = clock();
+        while(i < CMD_NUM - 1){
+            args[i] = args[i+1];
+            i++;
     }
-    return 0;
+    return time;
 }
 
 /**
@@ -124,14 +127,7 @@ int run(char * in){
 
     //check to see if time is the first argument
     //start a timer
-    double time = 0;
-    int time_flag = 0;
-    if (!strcmp(args[0], "time")){
-        remove_index_0(args);
-        int i = 0;
-        time = clock()/CLOCKS_PER_SEC;
-        time_flag = 1;
-    }
+    float time = remove_time_arg(args);
 
     //EXIT
     if (!strcmp(args[0], "exit")){  
@@ -153,7 +149,7 @@ int run(char * in){
     }
 
     //TIME
-    if (time_flag){
+    if (time){
         printf("the program completed in %f seconds",clock()/CLOCKS_PER_SEC - time);
     }
     return status;
