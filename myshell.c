@@ -28,7 +28,7 @@ int read_input(char* args[], char* in){
 
         //assign strtok(in) to args[i]
         //replace old in
-        args[i] = strtok(NULL, " ()<>|&;");
+        args[i] = strtok(NULL, " \n\t()<>|&;");
         if(args[i] == NULL){
             return i;
         }
