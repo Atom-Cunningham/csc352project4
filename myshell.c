@@ -47,13 +47,6 @@ int unix_cmd(char* args[]){
  */
 int cd(char* new_dir){
     int status = chdir(new_dir);
-
-    /**
-    //TODO remove prints
-    char cwd[256];
-    char * newCurrent = getcwd(cwd, sizeof(cwd));
-    printf("%s\n",newCurrent);
-    */
     if (status != 0){
         printf("cannot find directory %s\n", new_dir);
     }
@@ -73,7 +66,7 @@ int read_input(char* args[], char* in){
     }
     int i = 0;
     while( i<CMD_NUM && (args[++i] = strtok(NULL, " ")) != NULL){
-        printf("%s\n",args[i]); //sanity check
+        
     }
     args[i] = NULL;
     //returns the number of strings originally in in
@@ -120,11 +113,10 @@ int run(char * in){
             //ls is 1 or 2 on bad return
         ||  (!strcmp(args[0], "ls")  && status >  0)
             //if not pwd, non-zero is usually bad
-        ||  ( strcmp(args[0], "pwd") && status >  0)
+        ||  ( strcmp(args[0], "pwd") && status >  0))
         {
             fprintf(stderr, "invalid unix cmd");
         }
-        
     }
 
     //TIME
