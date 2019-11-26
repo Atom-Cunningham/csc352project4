@@ -12,6 +12,7 @@
 #define EXIT "exit"
 #define CD "cd"
 #define TIME "time"
+#define CMD_NUM 5
 
 //gets the input and splits it
 int read_input(char* args[], char* in){
@@ -24,7 +25,9 @@ int read_input(char* args[], char* in){
         return 0;
     }
     int i = 1;
-    while((args[i] = strtok(in, " ()<>|&;")) != NULL){
+    while((args[i] = strtok(in, " ()<>|&;")) != NULL
+            && i < CMD_NUM){
+                
         printf("%s\n",args[i]); //sanity check
         i++;
     }
@@ -35,7 +38,7 @@ int read_input(char* args[], char* in){
 
 int run(char * in){
     int arg_count;
-    char * args[5];
+    char * args[CMD_NUM];
     printf("running\n");
     read_input(args, in);
     printf("args[0]: %s\n", args[0]);
