@@ -1,18 +1,31 @@
+/**
+ * Adam Cunningham
+ * NetID Laser
+ * csc352 project 4
+ * 
+ * this is a basic shell
+ * It can perform built in commands such as 
+ * cd, exit, and time
+ * It can also run any unix command that is not built
+ * into the shell
+ * 
+ */
+#include <time.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h> 
 #include <stdio.h>
 #include <unistd.h>
-/**
- * support exit
- * cd
- * ls, nano, pwd, ls -l,wc
- * time
- * 
- */
+
 #define LEN 255
 #define CMD_NUM 25
 
+/**
+ * attempts to change the current working directory
+ * takes a string as the new directory path
+ * prints an error if a change in directory failed
+ * returns the error status
+ */
 int cd(char* new_dir){
     int status = chdir(new_dir);
 
@@ -28,7 +41,12 @@ int cd(char* new_dir){
     return status;
 }
 
-//gets the input and splits it
+/**
+ * takes an array of strings, and an input string from stdin
+ * replaces whitespace and specified charaters with '\0'
+ * copies the pointers to the passed in array of strings
+ * returns the count of the number of arguments given
+ */
 int read_input(char* args[], char* in){
     //make sure there is at least one arg
     if ((args[0] = strtok(in, " \n\t()<>|&;")) == NULL){
@@ -42,7 +60,13 @@ int read_input(char* args[], char* in){
     return i;
 }
 
-
+/**
+ * takes the input stream from fread
+ * parses it for arguments
+ * checks the first argument against built in commands
+ * then tries to run it as a unix command
+ * returns an error status
+ */
 int run(char * in){
     int arg_count;
     int status;
@@ -58,7 +82,7 @@ int run(char * in){
         exit(0);
         }
 
-    //CD
+    //Change directory
     if(!strcmp(args[0], "cd")){
         printf("cding\n");
         if (arg_count < 2 || args[1] == NULL){
@@ -69,7 +93,7 @@ int run(char * in){
     }
 
     //TIME
-
+    return status;
 }
 
 
