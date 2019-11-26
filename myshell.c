@@ -46,6 +46,7 @@ int run(char * in){
     printf("running\n");
     arg_count = read_input(args, in);
     printf("args[0]: %s\n", args[0]);
+    printf("strcmp(%s, exit) == %d", args[0], strcmp(args[0], "exit"));
     if (!strcmp(args[0], "exit")){  
         exit(0);
     }
