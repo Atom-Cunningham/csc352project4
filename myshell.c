@@ -173,7 +173,7 @@ int run(char * in){
     clock_t end = clock();
     double elapsed = (double)(end - start) / CLOCKS_PER_SEC;
     if (time){
-        printf("program ran in %d seconds", elapsed);
+        printf("program ran in %2f seconds", elapsed);
     }
 }
 
