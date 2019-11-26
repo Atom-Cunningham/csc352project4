@@ -9,7 +9,7 @@
  * 
  */
 #define LEN 1024
-char* get_input();
+#define EXIT "exit"
 
 //gets the input and splits it
 char* get_input(){
@@ -34,9 +34,9 @@ int count_tokens(char tokens[]){
     return count;
 }
 
-int run(char * args){
+int run(char ** args){
     printf("running\n");
-    if (strcmp(args, "exit") == 0){
+    if (strncmp(args, EXIT, sizeof EXIT) == 0){
         printf("args: %s\n", args);
         exit(0);
     }
